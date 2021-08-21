@@ -1,0 +1,83 @@
+
+#carousel {
+  height: 600px;
+  margin-left: 119px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.carousel-unit {
+  height: 413px;
+  width: 384px;
+  margin: 0;
+  border: 1px solid rgb(150, 55, 70); 
+    transform: translateX(100%);
+  transition-property: transform;
+  transition-duration: 3s;
+}
+.questions {  
+  color: pink;
+}
+
+.img {
+  border: 3px solid blueviolet;
+  border-radius: 50%;
+}
+
+/* .img {
+  transform: translateX(100%);
+  transition-property: transform;
+  transition-duration: 3s;
+} */
+
+.onscreen {
+  transform: translateX(0);
+  z-index: 1;
+  transition-duration: 3s;
+}
+
+.offscreen {
+  transform: translateX(-100%);
+  z-index: 1;
+  transition-duration: 3s;
+}
+.arrows {
+  transform: translateX(-1%);
+  transition-duration: 0.4s;
+}
+#left {
+  margin-left: 119px;
+  background-image: src("");
+}
+#right {
+  transform: rotate(180deg);
+}
+
+.dots {
+  position: absolute;
+  width: 100%;
+  top: 525px;
+  text-align: center;
+  z-index: 2;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 5px solid rgb(218, 79, 79);
+  display: inline-block;
+}
+
+.on {
+  background-color: white;
+}
+
+@media screen and (max-height: 600px) and (max-width: 720px) {
+  .carousel {
+    background-color:blue;
+  }
+}
