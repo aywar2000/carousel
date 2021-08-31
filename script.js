@@ -87,51 +87,40 @@ class Carousel {
   var carousel = new Carousel();
   carousel.run();
 
-  //////////
-  var item = document.querySelectorAll(".carousel-unit");
-  var i = 0;
-  var isTransitioning = false;
+  var units = document.getElementsByClassName("carousel-unit");
+  var unitsLength = units.length;
+  console.log(unitsLength);
+  var inTransit;
+  // var i = 0;
+  let slidePosition = 0;
+  var next = document.getElementById("right");
+  var prev = document.getElementById("left");
 
-  function moveItems(index) {
-    item[i].classList.remove("onscreen");
-    item[i].classList.add("offscreen");
-    if (i < item.length - 1) {
-      i++;
+  function nextSlide() {
+    if (slidePosition === unitsLength - 1) {
+      slidePosition = 0;
     } else {
-      i = 0;
+      slidePosition++;
     }
-    if (typeof index === "number") {
-      i = index;
-    } else {
-      i;
-    }
-    item[i].classList.add("onscreen");
-    isTransitioning = true;
+    inTransit = true;
+    units[slidePosition].classList.add("next");
+    units[0].classList.add("moveToLast");
   }
-
-  //NEŠTO ZA DISPLAY
-  // if(document.getElementsByClassName("carousel-item").length === 3) {
-  //   setwidth, itd
-  // } else if (length === 2) {
-
-  // }
-
-  var right = document.getElementById("right");
-
-  right.addEventListener("click", function () {
-    var units = document.getElementsByClassName("carousel-unit");
-    for (i = 0; i < units.length; i++) {
-      units[0].classList.add("offscreen");
-      units[1].classList.add("onscreen");
-      units[2].classList.add("onscreen");
-      units[3].classList.add("onscreen");
+  function prevSlide() {
+    if (slidePosition === 0) {
+      slidePosition = unitsLength - 1;
+    } else {
+      slidePosition--;
     }
-  }),
-    document.addEventListener("transitionend", function (e) {
-      var a = e.target.className;
-      if (a == "offscreen") {
-        e.target.classList.remove("offscreen");
-        isTransitioning = false;
-      }
-    });
+    units[slidePosition].classList.add("prev");
+    units[unitsLength - 1].classList.add("moveToFirst");
+  }
+  next.addEventListener("click", nextSlide);
+  prev.addEventListener("click", prevSlide);
+  document.addEventListener("transitionend", function (event) {
+    if (event.target.classList.contains("next")) {
+      inTransit = false;
+      event.target.classList.remove("next");
+    }
+  });
 })();
