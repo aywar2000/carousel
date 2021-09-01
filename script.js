@@ -1,7 +1,6 @@
-console.log("xOxOxOx");
 var content = [
   {
-    image: "C:UsersKorisnikDesktoplatana tasklatana1.png",
+    image: "latana task/latana1",
     headline: "What is Latana?",
     questions: [
       "How does Latana work?",
@@ -10,7 +9,7 @@ var content = [
     ],
   },
   {
-    image: "C:UsersKorisnikDesktoplatana tasklatana2.png",
+    image: "latana task/latana2",
     headline: "Getting Started",
     questions: [
       "What is MRP?",
@@ -19,7 +18,7 @@ var content = [
     ],
   },
   {
-    image: "C:UsersKorisnikDesktoplatana tasklatana1.png",
+    image: "latana task/latana3",
     headline: "Using Latana",
     questions: [
       "How to use Latana?",
@@ -28,7 +27,7 @@ var content = [
     ],
   },
   {
-    image: "/images/pic3.svg",
+    image: "latana task/latana4",
     headline: "Data collection & Methodology",
     questions: [
       "What is MRP?",
@@ -48,10 +47,16 @@ class Carousel {
   }
 
   run() {
-    let cell = carousel.getElementsByClassName("carousel-unit");
-    var carouselUnits = Array.from(cell);
+    let unit = carousel.getElementsByClassName("carousel-unit");
+    var carouselUnits = Array.from(unit);
 
     for (let i = 0; i < content.length; i++) {
+      // Image
+      let image = document.createElement("img");
+      image.className = "img";
+      image.src = content[i].image;
+      carouselUnits[i].appendChild(image);
+
       //Headlines
       let title = document.createElement("h4");
       let headlineText = document.createTextNode(content[i].headline);
@@ -60,15 +65,13 @@ class Carousel {
       let headline = carouselUnits[i].appendChild(title);
       carouselUnits[i].appendChild(headline);
 
-      // Image
-      let image = document.createElement("img");
-      image.className = "img";
-      image.src = content[i].image;
-      carouselUnits[i].appendChild(image);
-
       // Questions
       let questionsList = document.createElement("ul");
+      for (let j = 0; j < content[i].questions; j++) {
+        console.log("QWZ", questions[j]);
+      }
       let questionText = document.createTextNode(content[i].questions);
+      console.log("questions", content[i].questions);
       questionsList.appendChild(questionText);
       questionsList.classList = "questions";
       let questions = carouselUnits[i].appendChild(questionsList);
@@ -83,13 +86,17 @@ class Carousel {
   }
 }
 
+///////
+
 (function () {
   var carousel = new Carousel();
   carousel.run();
 
   var units = document.getElementsByClassName("carousel-unit");
   var unitsLength = units.length;
+  //var lastElement = unitsLength - 1;
   console.log(unitsLength);
+
   var inTransit;
   // var i = 0;
   let slidePosition = 0;
@@ -104,7 +111,11 @@ class Carousel {
     }
     inTransit = true;
     units[slidePosition].classList.add("next");
+    units[slidePosition].classList.add("onscreen");
     units[0].classList.add("moveToLast");
+    // if ((slidePosition = unitsLength - 1)) {
+    //   units[slidePosition].classList.add("blur");
+    // }
   }
   function prevSlide() {
     if (slidePosition === 0) {
@@ -113,12 +124,16 @@ class Carousel {
       slidePosition--;
     }
     units[slidePosition].classList.add("prev");
+    units[slidePosition].classList.add("onscreen");
     units[unitsLength - 1].classList.add("moveToFirst");
   }
-  next.addEventListener("click", nextSlide);
+  next.addEventListener("click", nextSlide, true);
   prev.addEventListener("click", prevSlide);
   document.addEventListener("transitionend", function (event) {
-    if (event.target.classList.contains("next")) {
+    if (
+      event.target.classList.contains("next") ||
+      event.target.classList.contains("prev")
+    ) {
       inTransit = false;
       event.target.classList.remove("next");
     }

@@ -1,6 +1,7 @@
 * {
   font-family: "Mullish", sans-serif;
   background-color: #e5e5e5;
+  box-sizing: border-box;
 }
 header {
   margin-left: 119px;
@@ -35,9 +36,15 @@ header > p {
   margin-top: 60px;
   flex-direction: column;
   align-items: stretch;
-  /* transform: translateX(100%);
+  transform: translateX(0);
   transition-property: transform;
-  transition-duration: 3s; */
+  transition-duration: 3s;
+}
+
+.onscreen {
+  transform: translateX(0);
+  z-index: 1;
+  transition-duration: 3s;
 }
 
 .blur {
@@ -48,6 +55,7 @@ header > p {
   filter: blur(5px);
   background-color: #ccc;
 }
+
 .questions {
   color: black;
   font-style: normal;
@@ -70,10 +78,12 @@ header > p {
   line-height: 40px;
 }
 
-.firstIndex {
+/* -- MOVING ITEMS -- */
+
+.onscreen {
   transform: translateX(0);
   z-index: 1;
-  transition-duration: 3s;
+  /* transition-duration: 3s; */
 }
 
 .prev {
@@ -93,8 +103,8 @@ header > p {
 }
 .moveToFirst {
   transform: translateX(-300%);
-  z-index: 0.7;
-  transition-duration: 3s;
+  z-index: 0.6;
+  transition-duration: 4s;
 }
 /* 
 .offscreen {
@@ -133,8 +143,31 @@ header > p {
   border: 2px solid #340d70;
 }
 
-@media screen and (max-height: 600px) and (max-width: 720px) {
+@media only screen and (min-device-width: 320px) and (max-width: 480px) {
+  header {
+    margin-left: 0;
+  }
   #carousel {
-    background-color: blue;
+    height: 35em;
+    margin-left: 0;
+  }
+  .carousel-unit {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 30px;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-width: 960px) {
+  header {
+    margin-left: 0;
+  }
+  #carousel {
+    height: 40em;
+    margin-left: 0;
+  }
+  .carousel-unit {
+    width: 50%;
+    margin-left: 0;
+    margin-top: 30px;
   }
 }
