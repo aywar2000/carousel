@@ -1,4 +1,4 @@
-# carouselatana
+# carousel
 Dynamic carousel written in HTML, CSS and JS, with a touch of ES6.
 The aim of this mini-project is to create a reusable content widget in the form of responsive carousel. After loading, the users should be able to interact with the different content the main app/webpage would provide, which is rendered in different carousel "cards".
 
